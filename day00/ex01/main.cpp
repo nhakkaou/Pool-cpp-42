@@ -1,15 +1,8 @@
 #include <iostream>
 #include <iomanip>
 #include "Contact.ClassName.hpp"
-
-void ft_search(Contact *inst)
+void ft_display(int i)
 {
-    int i = 0;
-    std::string first = ;
-    std::string last = ;
-    std::string nickname = ;
-    std::string Secret = ;
-
     std::cout << std::setw(10) << "Index"
               << "|"
               << std::setw(10) << "Firstname"
@@ -17,26 +10,78 @@ void ft_search(Contact *inst)
               << std::setw(10) << "Lastname"
               << "|"
               << std::setw(10) << "Nickname"
+              << "|";
+              
+              if (i == 1)
+              {
+              std::cout << std::setw(10) << "Secret"
               << "|"
-              << std::setw(10) << "Secret"
-              << "|"
-              << std::setw(10) << "Phone"
-              << std ::endl;
+              << std::setw(10) << "Phone";
+              }
+              std::cout << std::endl;
+}
+void ft_search(Contact *inst)
+{
+    int i = 0;
+    int index;
+    std::string first;
+    std::string last;
+    std::string nickname;
+    std::string Secret;
+    std::string phone;
+    ft_display(0);
     while (i < 8)
     {
-        if (inst[i].getfirst().length() > 0)
+        first = inst[i].getfirst();
+        last = inst[i].getlast();
+        nickname = inst[i].getNickname();
+        Secret = inst[i].getSecret();
+        phone = inst[i].getNumber();
+        if (first.length() > 0)
         {
-            if (inst[i].getfirst().length() >= 10)
-                inst[i].getfirst()[9] = '.';
-            std::cout << std::setw(10) << inst[i].getfirst().substr(0, 10)
-                      << std::endl;
+            std::cout << std::setw(10) << i << '|';
+            if (first.length() >= 10)
+                first[9] = '.';
+            std::cout << std::setw(10) << first.substr(0, 10) << '|';
+            if (first.length() >= 10)
+                last[9] = '.';
+            std::cout << std::setw(10) << last.substr(0, 10) << '|';
+            if (nickname.length() >= 10)
+                nickname[9] = '.';
+            std::cout << std::setw(10) << nickname.substr(0, 10) << '|' << std::endl;
         }
         i++;
     }
-
+    std::cout << "Which Index :";
+    std::cin >> index;
+    if (index >= 0 && index <= 8)
+    {
+        first = inst[index].getfirst();
+        last = inst[index].getlast();
+        nickname = inst[index].getNickname();
+        Secret = inst[index].getSecret();
+        phone = inst[index].getNumber();
+        ft_display(1);
+        std::cout << std::setw(10) << index << '|';
+        if (first.length() >= 10)
+            first[9] = '.';
+        std::cout << std::setw(10) << first.substr(0, 10) << '|';
+        if (first.length() >= 10)
+            last[9] = '.';
+        std::cout << std::setw(10) << last.substr(0, 10) << '|';
+        if (nickname.length() >= 10)
+            nickname[9] = '.';
+        std::cout << std::setw(10) << nickname.substr(0, 10) << '|';
+        if (Secret.length() >= 10)
+            Secret[9] = '.';
+        std::cout << std::setw(10) << Secret.substr(0, 10) << '|';
+        if (phone.length() >= 10)
+            phone[9] = '.';
+        std::cout << std::setw(10) << phone.substr(0, 10) << std::endl;
+    }
     return;
 }
-//setwidth
+
 void ft_add(Contact *inst, int i)
 {
 
@@ -75,20 +120,21 @@ int main()
     {
 
         std::cout << "Choose a value : " << std ::endl
-                  << "1. Search" << std ::endl
-                  << "2. Add"
+                  << "- ADD" << std ::endl
+                  << "- SEARCH"
                   << std ::endl
-                  << "3. Exit"
+                  << "- EXIT"
                   << std ::endl;
         std::cin >> test;
-        if (test == "1")
+        std::cin.ignore();
+        if (test == "SEARCH")
             ft_search(inst);
-        if (test == "2")
+        if (test == "ADD")
         {
             ft_add(inst, i);
             i++;
         }
-        if (test == "3")
+        if (test == "EXIT")
             exit(0);
     }
     return (0);
